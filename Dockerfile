@@ -73,7 +73,7 @@ COPY bin/startInForeground.sh ${PAYARA_PATH}/bin/startInForeground.sh
 
 USER root
 RUN \
- chown -R payara:payara ${PAYARA_PATH}/generate_deploy_commands.sh && \
+ chown -R payara:payara ${PAYARA_PATH} && \
  chmod a+x ${PAYARA_PATH}/generate_deploy_commands.sh && \
  chmod a+x ${PAYARA_PATH}/bin/startInForeground.sh
 USER payara
