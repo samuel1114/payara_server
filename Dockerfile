@@ -74,8 +74,9 @@ COPY bin/startInForeground.sh ${PAYARA_PATH}/bin/startInForeground.sh
 USER root
 RUN \
  chown -R payara:payara ${PAYARA_PATH} && \
+ chmod -R 777 ${PAYARA_PATH} && \
  chmod a+x ${PAYARA_PATH}/generate_deploy_commands.sh && \
  chmod a+x ${PAYARA_PATH}/bin/startInForeground.sh
 USER payara
 
-ENTRYPOINT su payara --command "${PAYARA_PATH}/generate_deploy_commands.sh && ${PAYARA_PATH}/bin/startInForeground.sh --passwordfile=/opt/pwdfile --postbootcommandfile ${POSTBOOT_COMMANDS} ${PAYARA_DOMAIN}"
+ENTRYPOINT whoami && ${PAYARA_PATH}/generate_deploy_commands.sh && ${PAYARA_PATH}/bin/startInForeground.sh --passwordfile=/opt/pwdfile --postbootcommandfile ${POSTBOOT_COMMANDS} ${PAYARA_DOMAIN}
