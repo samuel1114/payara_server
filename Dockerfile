@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk
 
-LABEL io.openshift.s2i.scripts-url="https://raw.githubusercontent.com/samuel1114/payara-server-s2i-41/master/s2i/bin"
+#LABEL io.openshift.s2i.scripts-url="https://raw.githubusercontent.com/samuel1114/payara-server-s2i-41/master/s2i/bin"
 
 RUN \
  apt-get update && \ 
