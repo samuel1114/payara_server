@@ -1,5 +1,7 @@
 FROM openjdk:8-jdk
 
+LABEL io.openshift.s2i.scripts-url="file:////tmp/SourcetoImage/s2i-payaraserver/s2i/bin"
+
 RUN \
  apt-get update && \ 
  apt-get install -y unzip 
