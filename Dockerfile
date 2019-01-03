@@ -12,6 +12,8 @@ RUN \
  mkdir -p ${PAYARA_PATH}/deployments && \
  useradd -b /opt -m -s /bin/bash -d ${PAYARA_PATH} payara && echo payara:payara | chpasswd
 
+RUN uid=$(id -u payara)                                                                                                                                                                                                                                 
+
 # specify Payara version to download
 ENV PAYARA_PKG https://s3-eu-west-1.amazonaws.com/payara.fish/Payara+Downloads/Payara+4.1.2.181/payara-4.1.2.181.zip
 ENV PAYARA_VERSION 181
@@ -74,9 +76,12 @@ COPY bin/startInForeground.sh ${PAYARA_PATH}/bin/startInForeground.sh
 USER root
 RUN \
  chown -R payara:payara ${PAYARA_PATH} && \
- chmod -R 777 ${PAYARA_PATH} && \
+ chgrp -R 0 ${PAYARA_PATH} && \
+ chmod -R g=u ${PAYARA_PATH} && \
  chmod a+x ${PAYARA_PATH}/generate_deploy_commands.sh && \
  chmod a+x ${PAYARA_PATH}/bin/startInForeground.sh
-USER payara
+USER ${uid}
 
+RUN chmod g=u /etc/passwd
 ENTRYPOINT ${PAYARA_PATH}/generate_deploy_commands.sh && ${PAYARA_PATH}/bin/startInForeground.sh --passwordfile=/opt/pwdfile --postbootcommandfile ${POSTBOOT_COMMANDS} ${PAYARA_DOMAIN}
+USER ${uid}
