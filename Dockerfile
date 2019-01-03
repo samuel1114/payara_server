@@ -77,7 +77,9 @@ USER root
 RUN \
  chown -R 1000070000 ${PAYARA_PATH} && \
  chgrp -R 0 ${PAYARA_PATH} && \
- chmod -R g=u ${PAYARA_PATH}
+ chmod -R g=u ${PAYARA_PATH} && \
+ chmod 777 ${PAYARA_PATH}/generate_deploy_commands.sh && \
+ chmod 777 ${PAYARA_PATH}/bin/startInForeground.sh
 USER 1000070000
 
 ENTRYPOINT ${PAYARA_PATH}/generate_deploy_commands.sh && ${PAYARA_PATH}/bin/startInForeground.sh --passwordfile=/opt/pwdfile --postbootcommandfile ${POSTBOOT_COMMANDS} ${PAYARA_DOMAIN}
