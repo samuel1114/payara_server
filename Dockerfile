@@ -76,14 +76,11 @@ COPY bin/uid_entrypoint ${PAYARA_PATH}/bin/uid_entrypoint
 
 USER root
 RUN \
- chown -R payara ${PAYARA_PATH} && \
+ chown -R 1000070000 ${PAYARA_PATH} && \
  chgrp -R 0 ${PAYARA_PATH} && \
- chmod -R g=u ${PAYARA_PATH} && \
- chmod -R 777 ${PAYARA_PATH}
-RUN chmod g=u /etc/passwd
-ENTRYPOINT ${PAYARA_PATH}/bin/uid_entrypoint
-USER 1001
+ chmod -R g=u ${PAYARA_PATH}
+USER 1000070000
 
 #RUN chmod g=u /etc/passwd
 ENTRYPOINT ${PAYARA_PATH}/generate_deploy_commands.sh && ${PAYARA_PATH}/bin/startInForeground.sh --passwordfile=/opt/pwdfile --postbootcommandfile ${POSTBOOT_COMMANDS} ${PAYARA_DOMAIN}
-USER 1001
+USER 1000070000
