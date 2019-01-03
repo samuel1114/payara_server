@@ -91,5 +91,6 @@ RUN chown -R 1000070000 ${APP_ROOT} && \
     chmod -R g=u ${APP_ROOT} /etc/passwd
 USER 1000070000
 
-ENTRYPOINT ${PAYARA_PATH}/generate_deploy_commands.sh
+ENTRYPOINT ${PAYARA_PATH}/generate_deploy_commands.sh && ${PAYARA_PATH}/bin/startInForeground.sh --passwordfile=/opt/pwdfile --postbootcommandfile ${POSTBOOT_COMMANDS} ${PAYARA_DOMAIN}
+
 USER 1000070000
