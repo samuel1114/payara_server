@@ -72,14 +72,16 @@ ENV POSTBOOT_COMMANDS=${PAYARA_PATH}/post-boot-commands.asadmin
 
 COPY generate_deploy_commands.sh ${PAYARA_PATH}/generate_deploy_commands.sh
 COPY bin/startInForeground.sh ${PAYARA_PATH}/bin/startInForeground.sh
+COPY bin/uid_entrypoint ${PAYARA_PATH}/bin/uid_entrypoint
 
 USER root
 RUN \
  chown -R payara:payara ${PAYARA_PATH} && \
  chgrp -R 0 ${PAYARA_PATH} && \
  chmod -R g=u ${PAYARA_PATH} && \
- chmod a+x ${PAYARA_PATH}/generate_deploy_commands.sh && \
- chmod a+x ${PAYARA_PATH}/bin/startInForeground.sh
+ chmod u+x ${PAYARA_PATH}/generate_deploy_commands.sh && \
+ chmod u+x ${PAYARA_PATH}/generate_deploy_commands.sh && \
+ chmod u+x ${PAYARA_PATH}/bin/startInForeground.sh
 USER ${uid}
 
 RUN chmod g=u /etc/passwd
