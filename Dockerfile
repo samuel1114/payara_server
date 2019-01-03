@@ -84,5 +84,5 @@ RUN \
  chmod 777 ${PAYARA_PATH}/bin/startInForeground.sh
 USER 1000070000
 
-ENTRYPOINT ${PAYARA_PATH}/generate_deploy_commands.sh && ${PAYARA_PATH}/bin/startInForeground.sh --passwordfile=/opt/pwdfile --postbootcommandfile ${POSTBOOT_COMMANDS} ${PAYARA_DOMAIN}
+ENTRYPOINT ${PAYARA_PATH}/generate_deploy_commands.sh
 USER 1000070000
