@@ -77,9 +77,7 @@ COPY bin/uid_entrypoint ${PAYARA_PATH}/bin/uid_entrypoint
 USER root
 RUN \
  chown -R payara:payara ${PAYARA_PATH} && \
- chmod -R 776 ${PAYARA_PATH} && \
- chmod 775 ${PAYARA_PATH}/generate_deploy_commands.sh && \
- chmod 775 ${PAYARA_PATH}/bin/startInForeground.sh
+ chmod -R 777 ${PAYARA_PATH}
 USER ${uid}
 
 #RUN chmod g=u /etc/passwd
